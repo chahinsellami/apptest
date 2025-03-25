@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'assets/models/category_models.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
