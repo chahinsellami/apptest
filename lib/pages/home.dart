@@ -1,18 +1,31 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'assets/models/category_models.dart';
+import '../models/category_models.dart'; // Import the CategoryModel class
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   Homepage({super.key});
 
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
   List<CategoryModel> categories = [];
+
   void _getCategories() {
     categories = CategoryModel.getCategories();
   }
 
   @override
+  // ignore: must_call_super
+  void initState() {
+    _getCategories();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _getCategories(); // Call the method to get categories
     return Scaffold(
       appBar: appBar(),
       backgroundColor: Colors.white,
@@ -38,11 +51,49 @@ class Homepage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  height: 100,
-                  color: Colors.green,
-                  child: ListView.builder(
+                  height: 120,
+                  color: Colors.white,
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(width: 25),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
                     itemBuilder: (context, index) {
-                      return Container();
+                      return Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                          // ignore: deprecated_member_use
+                          color: categories[index].color.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgPicture.asset(
+                                  categories[index].iconpath,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              categories[index].name,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 ),

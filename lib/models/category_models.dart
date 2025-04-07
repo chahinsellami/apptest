@@ -22,7 +22,7 @@ class CategoryModel {
     categories.add(
       CategoryModel(
         name: 'cake',
-        iconpath: 'assets/icons/cake.svg',
+        iconpath: 'assets/icons/honey-pancakes.svg',
         color: Colors.orange,
       ),
     );
