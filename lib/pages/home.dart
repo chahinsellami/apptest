@@ -89,25 +89,25 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                 ),
                                 Text(
-                                  diet[index].level +
-                                      ' | ' +
-                                      diet[index].duration +
-                                      ' | ' +
-                                      diet[index].calorie,
+                                  '${diet[index].level ?? 'Unknown'} | ${diet[index].duration ?? 'Unknown'} | ${diet[index].calorie ?? 'Unknown'}',
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                              ],
+                                SizedBox(height: 10),
                                 Container(
                                   height: 40,
                                   width: 135,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
+                                        diet[index].isSelected
+                                            ? categories[index].color
+                                            : categories[index].color
+                                                .withOpacity(0.2),
                                         categories[index].color.withOpacity(
                                           0.2,
                                         ),
@@ -115,6 +115,19 @@ class _HomepageState extends State<Homepage> {
                                           0.2,
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'View Recipe',
+                                      style: TextStyle(
+                                        color:
+                                            diet[index].isSelected
+                                                ? Colors.white
+                                                : categories[index].color,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
